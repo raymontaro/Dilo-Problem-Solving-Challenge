@@ -1,26 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BallMovement : MonoBehaviour
 {
-    public float speed;    
+    public float speed;
+    public LayerMask layerMask;
 
-    Rigidbody rb;
+    NavMeshAgent nav;
+    Camera cam;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();        
+        nav = GetComponent<NavMeshAgent>();
+        cam = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(moveX, 0, moveZ);        
+        if (Input.GetMouseButtonUp(0))
+        {
 
-        rb.MovePosition(transform.position + movement * Time.deltaTime * speed);
+            RaycastHit hit;
+
+            if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, layerMask))
+            {                
+                nav.SetDestination(hit.point);
+            }
+        }
     }
 }
