@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 562154455145692269}
   - component: {fileID: 4599711906471193867}
   - component: {fileID: 2349135643279110593}
-  - component: {fileID: 4828369017755282884}
+  - component: {fileID: 5382908380935440143}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -87,24 +87,20 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8471135241145584114}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!208 &4828369017755282884
-NavMeshObstacle:
+--- !u!114 &5382908380935440143
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8471135241145584114}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1, y: 0.5, z: 1}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8fddd08aeaa88d4faa3b5af5cef55fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
