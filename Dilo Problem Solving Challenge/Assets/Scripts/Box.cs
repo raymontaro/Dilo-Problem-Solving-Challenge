@@ -1,68 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Box : MonoBehaviour
 {
+    public GameObject boxNo;
+    public Text boxNoText;
 
-    Renderer r;
-    Collider col;
+    GameObject instructionPanel;
 
-    Transform player;
-
-    bool isHit = false;
-    float time = 3f;
-    float timer = 0f;
+    public int no;
 
     private void Start()
     {
-        r = GetComponent<Renderer>();
-        col = GetComponent<Collider>();
-
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        instructionPanel = GameObject.FindGameObjectWithTag("instruction");
     }
 
     private void Update()
     {
-        r.enabled = !isHit;
-        col.enabled = !isHit;
-
-        if(isHit && timer < time)
-        {
-            timer += Time.deltaTime;
-        }
-        else if(isHit && timer >= time)
-        {
-            ChangePosition();
-
-            isHit = false;
-        }
+        boxNo.SetActive(instructionPanel.activeSelf);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Score.Instance.AddScore(1);
+            if (no == Score.Instance.currentScore)
+            {
 
-            isHit = true;
-            timer = 0f;
-        }
-    }
+                Score.Instance.AddScore(1);
 
-    void ChangePosition()
-    {
-        float posX = Random.Range(-8, 8);
-        float posZ = Random.Range(-4, 4);
-        Vector3 pos = new Vector3(posX, 0.25f, posZ);
-
-        if(Vector3.Distance(pos, player.position) <= 2f)
-        {
-            ChangePosition();
+                this.gameObject.SetActive(false);
+            }
+            else
+            {
+                this.gameObject.SetActive(false);
+                Score.Instance.GameOver();
+            }
         }
-        else
-        {
-            transform.position = pos;
-        }
-    }
+    }    
 }
