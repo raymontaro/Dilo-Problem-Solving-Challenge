@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-    public float speedX;
-    public float speedZ;
+    public float speed;    
 
     Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
-
-        rb.AddForce(new Vector3(speedX, 0, speedZ), ForceMode.VelocityChange);
+        rb = GetComponent<Rigidbody>();        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical");
+        Vector3 movement = new Vector3(moveX, 0, moveZ);        
+
+        rb.MovePosition(transform.position + movement * Time.deltaTime * speed);
     }
 }
